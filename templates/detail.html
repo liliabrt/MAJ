@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>BibStore</title>
+
+    </head>
+    <body>
+        
+        
+ <table>
+    <tr>
+          <th>Serial</th>
+          <th>title</th>
+          <th>category</th>
+          <th>items</th>
+          <th>price</th>
+          <th>author</th>
+          <th>description</th>
+          <th>stock</th>
+          <th>Picture</th>
+    </tr>
+    
+    {% for e in books  %}
+    <tr>        <td>{{ e.id }}</td>
+                <td>{{ e.title }}</td>
+                <td>{{ e.category }}</td>
+                <td>{{ e.item }}</td>
+                <td>{{ e.price }}</td>
+                <td>{{ e.author }}</td>
+                <td>{{ e.description }}</td>
+                <td>{{ e.stock }}</td>
+                <td><img src={{ url_for('static', filename='images/books/'+ e.picture ) }} alt="{{ e.picture }}" ></td>
+                <td>
+                <a href="/update/{{ e.0 }}">Edit</a>
+                
+              </td>
+              
+              {% endfor %}
+    
+    
+    </tr> 
+    
+
+
+ </table>
+ 
+    
+
+    </body>

@@ -1,0 +1,232 @@
+
+{% include "header.html" %}
+
+<link href="{{url_for('static', filename = 'css/bootstrap.min.css')}}" rel="stylesheet">
+
+
+<div class="container">
+ <div class="row">
+   <div class="col md-12">
+      <h2>Books List
+      <button type="button" class="btn btn-success  pull-right" data-toggle="modal" data-target="#myModal">Add Books Data</button>
+     </h2>
+    {%with messages = get_flashed_messages()%}
+
+    {%if messages%}
+
+    {% for message in messages %}
+
+    <div class="alert alert-success alert-dismissable" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label ="close">
+        <span aria-hidden="true">&times;</span></button>
+        {{message}}
+
+
+    </div>
+
+
+    {%endfor%}
+    {%endif%}
+    {%endwith%}
+
+
+
+
+    
+   
+    <h1>All Books </h1>
+    {% if books  %}
+     <table>
+        <tr>
+              <th>Serial</th>
+              <th>title</th>
+              <th>category</th>
+              <th>items</th>
+              <th>price</th>
+              <th>author</th>
+              <th>description</th>
+              <th>stock</th>
+              <th>Picture</th>
+        </tr>
+        {% for e in books %}
+        <tr>        <td>{{ e.id }}</td>
+                    <td>{{ e.title }}</td>
+                    <td>{{ e.category }}</td>
+                    <td>{{ e.item }}</td>
+                    <td>{{ e.price }}</td>
+                    <td>{{ e.author }}</td>
+                    <td>{{ e.description }}</td>
+                    <td>{{ e.stock }}</td>
+                    <td><img src={{ url_for('static', filename='images/books/'+ e.picture ) }} alt="{{ e.picture }}" ></td>
+                    <td>
+                     <a href="/update/{{ e.0 }}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{ e.0 }}">Edit</a>
+                     <a href="/delete/{{ e.id }}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure For Delete?')">Delete</a>
+                  </td>   
+        </tr> 
+        <div id="modaledit{{ e.0 }}" class="modal fade" role="dialog">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+                   <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Update Information</h4>
+                  </div>
+      
+      
+               <div class="modal-body">
+               <form  role="form" enctype="multipart/form-data" action="{{ url_for('update') }}" method="POST">
+                  <div class="form-group">
+                     <label>Title</label>	
+                     <input type="hidden"  name="id" value="{{ e.id }}">
+                     <input class="form-control" required="required" name="title" value="{{ e.title }}">
+                 </div>
+                 <div class="form-group">
+                     <label>Category</label>
+                     <select class="form-control" id="category_id" onchange="populateList();" name="category" value="{{ e.category }}">
+                             <option selected>Select category</option>
+                             <option value="New Arrival">New Arrival</option>
+                             <option value="Most Popular">Most Popular</option>
+                             <option value="Trending">Trending</option>
+                     </select>
+                 </div>
+                 <div class="form-group">
+                   <label>item</label>
+                   <input class="form-control" required="required" name="item" value="{{ e.item }}">
+                 </div> 
+                 
+                 <div class="form-group">
+                     <label>Price</label>
+                     <input class="form-control" required="required" name="price" placeholder="Enter price" value="{{  e.price }}">
+                 </div>
+                 <div class="form-group">
+                   <label>Author</label>
+                   <input class="form-control" required="required" name="author" value="{{ e.author }}">
+                 </div>
+                 <div class="form-group">
+                     <label>Description</label>
+                     <textarea class="form-control" required="required" name="description" rows="3"
+                               placeholder="Write product description" value="{{ e.description }}"></textarea>
+                 </div>
+                 <div class="form-group">
+                     <label>Available</label>
+                     <input class="form-control" required="required" name="stock" value="{{ e.stock }}" >
+                 </div>
+                    
+                 
+                 <div class="form-group">
+                   <label>Add Image</label>
+                   <input type="file" required="required" name="picture" value="{{ e.picture }}">
+                 </div>
+      
+                     <div class="form-group">
+                        <button class="btn btn-primary" type="sbumit">Update</button>
+                     </div>
+                  </form>
+      
+      
+               </div>
+      
+      
+               <div class="modal-footer">
+                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+               </div>
+            </div>
+         </div>
+      </div>
+    
+    {% endfor %}
+     </table>
+    {% endif %}
+
+  </div>
+
+
+<!-- Modal -->
+
+
+<div id="myModal" class="modal fade" role="dialog">
+ <div class="modal-dialog">
+   <div class="modal-content">
+      <div class="modal-header">
+         <button type="button" class="close" data-dismiss="modal">&times;</button>
+           <h4 class="modal-title">Please Insert Data</h4>
+
+
+      </div>
+      <div class="modal-body">
+        <form  role="form" enctype=multipart/form-data action="{{ url_for('add_product') }}" method="POST">
+       <div class="form-group">
+           <label>Title</label>	
+           <input class="form-control" required="required" name="title">
+       </div>
+       <div class="form-group">
+           <label>Category</label>
+           <select class="form-control" id="category_id" onchange="populateList();" name="category">
+                   <option selected>Select category</option>
+                   <option value="New Arrival">New Arrival</option>
+                   <option value="Most Popular">Most Popular</option>
+                   <option value="Trending">Trending</option>
+           </select>
+       </div>
+       <div class="form-group">
+         <label>items</label>
+         <input class="form-control" required="required" name="item" >
+       </div> 
+       
+       <div class="form-group">
+           <label>Price</label>
+           <input class="form-control" required="required" name="price" placeholder="Enter price">
+       </div>
+       <div class="form-group">
+         <label>Author</label>
+         <input class="form-control" required="required" name="author">
+       </div>
+       <div class="form-group">
+           <label>Description</label>
+           <textarea class="form-control" required="required" name="description" rows="3"
+                     placeholder="Write product description"></textarea>
+       </div>
+       <div class="form-group">
+           <label>Available</label>
+           <input class="form-control" required="required" name="stock" >
+       </div>
+          
+       
+       <div class="form-group">
+         <label>Add Image</label>
+         <input type="file" required="required" name="picture">
+       </div>
+       <!--
+       <div class="form-group">
+         <label>Language</label>
+         <input class="form-control" required="required" name="lang">
+       </div>
+       -->
+       <div class="form-group">
+         <button class="btn btn-primary" type="submit">Insert Data</button>
+      </div>
+       </form>  
+       </div>
+
+
+         <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+         </div>
+
+
+      </div>
+
+
+   </div>
+
+
+</div>
+</div>
+</div>
+
+
+
+
+
+<script type="text/javascript" src="{{url_for('static', filename='js/jquery-3.2.1.min.js') }}"></script>
+
+<script type="text/javascript" src="{{url_for('static', filename = 'js/bootstrap.min.js')}}"></script>

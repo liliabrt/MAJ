@@ -1,0 +1,22 @@
+<h2>Users List</h2>
+<h1>All users </h1>
+{% if users  %}
+ <table>	
+    <tr>
+          <th>Serial</th>
+          <th>Name</th>
+          <th>E-mail</th>
+          <th>Password</th>
+          
+    </tr>
+    {% for a in users %}
+    <tr>        <td>{{ a.userid	}}</td>
+                <td>{{ a.name }}</td>
+                <td>{{ a.email }}</td>
+                <td>{{ a.password }}</td>
+               
+    </tr>  
+    {% endfor %}
+ </table>
+{% endif %}
+

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<!-- Created By CodingLab - www.codinglabweb.com -->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <!---<title> Responsive Registration Form | CodingLab </title>--->
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/loginAndregister.css') }}">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+<body style=" background-image: url('static/images/wp2036901.jpg');">
+  <header>
+    <nav>
+       <a href="{{ url_for('Home')}}"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="" class="logo"></a>
+       <ul>
+         <li><a href="#">Services</a></li>
+         <li><a href="#">A propos</a></li>
+
+       </ul>
+       <img src="menu-burger.png" alt="" class="menu">
+    </nav>
+</header>
+<section>
+  <div class="container">
+    <div class="title">Registration</div>
+    <div class="content">
+      <form action="{{ url_for('register') }}" method="post">
+         {% if mesage is defined and mesage %}
+         <div class="alert alert-warning">{{ mesage }}</div>
+         {% endif %}
+        <div class="user-details">
+          <div class="input-box">
+            <span class="details">Name</span>
+            <input name="name" type="text" placeholder="Enter your name" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Email</span>
+            <input name="email" type="email" placeholder="Enter your email" required>
+          </div>
+          <div class="input-box">
+            <span class="details">adress</span>
+            <input name="adress" type="text" placeholder="Enter your adress" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Phone Number</span>
+            <input name="tel" type="text" placeholder="Enter your number" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Password</span>
+            <input name="password" type="password" placeholder="Enter your password" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Confirm Password</span>
+            <input name="confirmation" type="password" placeholder="Confirm your password" required>
+          </div>
+        </div>
+        <div class="button">
+          <input type="submit" value="Register">
+        </div>
+        <div style="color: #F5CBA7;">
+            Already have an account? 
+             <a style="color:#fff;" href="{{ url_for('login') }}">Login here</a>
+         </div>
+      </form>
+    </div>
+  </div>
+</section>
+</body>
+</html>

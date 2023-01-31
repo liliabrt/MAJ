@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<!-- Created By CodingLab - www.codinglabweb.com -->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <!---<title> Responsive Registration Form | CodingLab </title>--->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/loginANDregister.css') }}">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+<body style="background-image: url('static/images/wp2036901.jpg');">
+  <header>
+    <nav>
+       <a href="{{ url_for('Home')}}"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="" class="logo"></a>
+       <ul>
+         <li><a href="#">Services</a></li>
+         <li><a href="#">A propos</a></li>
+
+       </ul>
+      
+    </nav>
+</header>
+<section>
+  <div class="container">
+    <div class="title">Login Admin</div>
+    <div class="content">
+        <form action="{{ url_for('admin_login') }}" method="post">
+            {% if mesage is defined and mesage %}
+                <div class="alert alert-warning">{{ mesage }}</div>
+            {% endif %}
+        <div class="user-details">
+          <div class="input-box">
+            <span class="details">Email</span>
+            <input name="email" type="email" placeholder="Enter your email" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Password</span>
+            <input name="password" type="password" placeholder="Enter your password" required>
+          </div>
+        </div>
+       
+        <div class="button">
+          <input type="submit" value="login">
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+</body>
+</html>

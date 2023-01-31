@@ -1,0 +1,51 @@
+<form role="form" enctype=multipart/form-data class="" action="{{ url_for('update') }}"
+  method="post">
+<div class="form-group">
+    <label>Title</label>	
+    <input class="form-control" required="required" name="title">
+</div>
+<div class="form-group">
+    <label>Category</label>
+    <select class="form-control" id="category_id" onchange="populateList();" name="category">
+            <option selected>Select category</option>
+            <option value="New Arrival">New Arrival</option>
+            <option value="Most Popular">Most Popular</option>
+            <option value="Trending">Trending</option>
+    </select>
+</div>
+<div class="form-group">
+  <label>item</label>
+  <input class="form-control" required="required" name="item" >
+</div> 
+
+<div class="form-group">
+    <label>Price</label>
+    <input class="form-control" required="required" name="price" placeholder="Enter price">
+</div>
+<div class="form-group">
+  <label>Author</label>
+  <input class="form-control" required="required" name="author">
+</div>
+<div class="form-group">
+    <label>Description</label>
+    <textarea class="form-control" required="required" name="description" rows="3"
+              placeholder="Write product description"></textarea>
+</div>
+<div class="form-group">
+    <label>Available</label>
+    <input class="form-control" required="required" name="stock" >
+</div>
+   
+
+<div class="form-group">
+  <label>Add Image</label>
+  <input type="file" required="required" name="picture">
+</div>
+<!--
+<div class="form-group">
+  <label>Language</label>
+  <input class="form-control" required="required" name="lang">
+</div>
+-->
+<button type="submit" class="btn btn-default">Submit Button</button>
+</form>  
